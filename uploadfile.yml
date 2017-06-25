@@ -30,3 +30,4 @@
       register: shell_out
 
     - debug: var=shell_out  
+#koniec
