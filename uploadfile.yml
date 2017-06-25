@@ -1,31 +1,32 @@
-  3 - hosts: all
-  4   vars:
-  5 #    to_install: rsync
-  6      dom: "home/andre/"
-  7 #
-  8   tasks:
-  9 #    - name: install rsync if missing 
- 10 #        yum: name = '{{to_install}}' state latest
- 11 #        when: ansible_os_family=='RedHat'
- 12 #        apt:
- 13 #          name: '{{to_install}}'
- 14 #          state8pr: present
- 15 #        when: ansible_os_faimily=='Debian'  
- 16 
- 17     - synchronize:
- 18         src: /'{{dom}}'skrypt.sh
- 19         dest: /'{{dom}}'skrypt.sh
- 20     - name: run the skrypt
- 21       shell: /bin/bash '{{dom}}'/skrypt.sh 
- 22 
- 23     - name: check if dns-server is set 
- 24       shell: grep '10.128.1.102' /etc/resolv.conf
- 25       register: grep_out
- 26 
- 27     - name: after check
- 28       shell: echo "you need to change resolv.conf on this  host"
- 29       when: grep_out.stdout != 0
- 30       register: shell_out
- 31 
- 32     - debug: var=shell_out
- #
+---
+#############################################  upload file 
+- hosts: all 
+  vars: 
+#    to_install: rsync
+     dom: "home/andre/"
+#
+  tasks:
+#    - name: install rsync if missing 
+#        yum: name = '{{to_install}}' state latest
+#        when: ansible_os_family=='RedHat'
+#        apt:
+#          name: '{{to_install}}'
+#          state8pr: present
+#        when: ansible_os_faimily=='Debian'  
+ 
+    - synchronize: 
+        src: /'{{dom}}'skrypt.sh
+        dest: /'{{dom}}'skrypt.sh
+    - name: run the skrypt
+      shell: /bin/bash '{{dom}}'/skrypt.sh 
+
+    - name: check if dns-server is set 
+      shell: grep '10.128.1.102' /etc/resolv.conf 
+      register: grep_out
+
+    - name: after check 
+      shell: echo "you need to change resolv.conf on this  host"
+      when: grep_out.stdout != 0 
+      register: shell_out
+
+    - debug: var=shell_out  
