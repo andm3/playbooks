@@ -14,9 +14,9 @@
 #          state8pr: present
 #        when: ansible_os_faimily=='Debian'  
  
-    - synchronize: 
-        src: /'{{dom}}'skrypt.sh
-        dest: /'{{dom}}'skrypt.sh
+#    - synchronize: 
+#        src: /'{{dom}}'skrypt.sh
+#        dest: /'{{dom}}'skrypt.sh
     - name: run the skrypt
       shell: /bin/bash '{{dom}}'/skrypt.sh 
 
