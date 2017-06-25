@@ -28,3 +28,4 @@
  30       register: shell_out
  31 
  32     - debug: var=shell_out
+ #
