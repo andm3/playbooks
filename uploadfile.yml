@@ -20,20 +20,20 @@
 #    - name: run the skrypt
 #       shell: /bin/bash '{{dom}}'/skrypt.sh 
 
-    - name: check if dns-server is set 
-      shell: grep 'my.lab:' /etc/resolv.conf 
-      register: grep_out
+#    - name: check if dns-server is set 
+#      shell: grep 'my.lab:' /etc/resolv.conf 
+#      register: grep_out
 
-    - name: after check 
-      shell: echo "you need to change resolv.conf on this  host"
-      when: grep_out.stdout != 1 
-      register: shell_out
+#    - name: after check 
+#       shell: echo "you need to change resolv.conf on this  host"
+#      when: grep_out.stdout != 1 
+#      register: shell_out
 
-    - debug: var=shell_out  
+#    - debug: var=shell_out  
     
     - block:
        - name: Upload/replace /etc/resolv.conf 
-         template: src=upload_resolv.conf dest=/etc/resolv.conf 
+         template: src=upload_resolv.conf.j2 dest=/etc/resolv.conf 
          notify: restart_net
        - name: restart_net
          shell: service networking restart 
