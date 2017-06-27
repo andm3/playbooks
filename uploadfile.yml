@@ -21,7 +21,7 @@
       shell: /bin/bash '{{dom}}'/skrypt.sh 
 
     - name: check if dns-server is set 
-      shell: grep '10.128.1.102' /etc/resolv.conf 
+      shell: grep 'my.lab:' /etc/resolv.conf 
       register: grep_out
 
     - name: after check 
