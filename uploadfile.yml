@@ -26,7 +26,7 @@
 
     - name: after check 
       shell: echo "you need to change resolv.conf on this  host"
-      when: grep_out.stdout != 0 
+      when: grep_out.stdout != 1 
       register: shell_out
 
     - debug: var=shell_out  
