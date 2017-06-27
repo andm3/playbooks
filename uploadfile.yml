@@ -1,0 +1,33 @@
+---
+#############################################  upload file 
+- hosts: all 
+  vars: 
+#    to_install: rsync
+     dom: "home/andre/"
+#
+  tasks:
+#    - name: install rsync if missing 
+#        yum: name = '{{to_install}}' state latest
+#        when: ansible_os_family=='RedHat'
+#        apt:
+#          name: '{{to_install}}'
+#          state8pr: present
+#        when: ansible_os_faimily=='Debian'  
+ 
+#    - synchronize: 
+#        src: /'{{dom}}'skrypt.sh
+#        dest: /'{{dom}}'skrypt.sh
+    - name: run the skrypt
+      shell: /bin/bash '{{dom}}'/skrypt.sh 
+
+    - name: check if dns-server is set 
+      shell: grep 'my.lab:' /etc/resolv.conf 
+      register: grep_out
+
+    - name: after check 
+      shell: echo "you need to change resolv.conf on this  host"
+      when: grep_out.stdout != 1 
+      register: shell_out
+
+    - debug: var=shell_out  
+#koniec
