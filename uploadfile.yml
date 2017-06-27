@@ -18,7 +18,7 @@
 #        src: /'{{dom}}'skrypt.sh
 #        dest: /'{{dom}}'skrypt.sh
 #    - name: run the skrypt
-#      shell: /bin/bash '{{dom}}'/skrypt.sh 
+#       shell: /bin/bash '{{dom}}'/skrypt.sh 
 
     - name: check if dns-server is set 
       shell: grep 'my.lab:' /etc/resolv.conf 
