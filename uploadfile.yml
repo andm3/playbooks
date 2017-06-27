@@ -30,5 +30,19 @@
       register: shell_out
 
     - debug: var=shell_out  
+    
+    - block:
+       - name: Upload/replace /etc/resolv.conf 
+         template: src=upload_resolv.conf dest=/etc/resolv.conf 
+         notify: restart_net
+       - name: restart_net
+         shell: service networking restart 
+       
+      when: ansible_os_faimily=='Debian'          # this two applies for whole block ! 
+      become: yes 
+    
+   
+      
+       
 #koniec
 # kniec221
