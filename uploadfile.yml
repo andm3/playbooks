@@ -37,7 +37,10 @@
          notify: restart_net
        - name: restart_net
          shell: service networking restart 
+        
        
+      always: 
+       - debug: msg="Stop "
       when: ansible_os_faimily=='Debian'          # this two applies for whole block ! 
       become: yes 
     
