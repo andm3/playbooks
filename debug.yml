@@ -1,0 +1,19 @@
+---
+# example of debug messages 
+- hosts: all 
+  
+  tasks:
+    - block: 
+       - name: uptime_check
+         shell: /usr/bin/uptime | awk '{print $3}'
+         register: result 
+     
+       - debug: msg="Server not running" 
+         when: result|failed
+       - debug: msg="Server needs reboot"
+         when: result|match("[99-999]") 
+       - name: debug result 
+         debug:
+           var: result
+           verbosity: 2 
+     
